@@ -4,6 +4,8 @@
 
 ## Usage
 
+- build the container `docker build -t pre-commit .`
+
 - Create `.pre-commit-config.yaml` in the root of your repo. For example
 
 ```yaml
@@ -65,7 +67,7 @@ repos:
   if [[ CONTAINER_EXISTS -eq 0 ]]; then
       docker restart $NAME && docker attach --no-stdin $NAME
   else
-      docker run -t -v $(pwd):/pre-commit --name $NAME taghash/pre-commit
+      docker run -t -v $(pwd):/pre-commit --name $NAME pre-commit
   fi
 
   ```
@@ -81,5 +83,5 @@ repos:
   The docker command (as in the `pre-commit` script) would then become
 
   ```shell
-  docker run -t -v $(pwd):/pre-commit -v $HOME/.aws:/root/.aws:ro --name $NAME taghash/pre-commit
+  docker run -t -v $(pwd):/pre-commit -v $HOME/.aws:/root/.aws:ro --name $NAME pre-commit
   ```
